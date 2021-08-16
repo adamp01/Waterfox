@@ -28,10 +28,7 @@ jobs:
 
           - name: Install dependencies
             run: |
-              choco install llvm --version=11.1.0 nasm nodejs --version=10.24.1 \
-              choco install rust-ms --version=1.51.0 vcredist140 isualstudio2017-workload-nativedesktop \
-              visualstudio2017-workload-nativegame visualstudio2017community \
-              windows-sdk-10-version-2004-all
+              choco install llvm --version=11.1.0 nasm nodejs --version=10.24.1 rust-ms --version=1.51.0 vcredist140 isualstudio2017-workload-nativedesktop visualstudio2017-workload-nativegame visualstudio2017community windows-sdk-10-version-2004-all
 
           - name: Mach build
             run: |
