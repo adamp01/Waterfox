@@ -31,7 +31,7 @@ jobs:
 
           - name: Install dependencies
             run: |
-              choco install nasm vcredist140 isualstudio2017-workload-nativedesktop visualstudio2017-workload-nativegame visualstudio2017community windows-sdk-10-version-2004-all
+              choco install ccache nasm vcredist140 isualstudio2017-workload-nativedesktop visualstudio2017-workload-nativegame visualstudio2017community windows-sdk-10-version-2004-all
               choco install llvm --version=11.1.0
               choco install nodejs --version=10.24.1
               choco install rust-ms --version=1.51.0
