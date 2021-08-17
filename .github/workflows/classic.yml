@@ -51,7 +51,8 @@ jobs:
           - name: Mach build
             shell: bash
             run: |
-              "/c/mozilla-build/start-shell.bat" "echo $PWD && ls -a $PWD && $PWD/mach build"
+              "/c/mozilla-build/start-shell.bat" ls -a $PWD
+              "/c/mozilla-build/start-shell.bat" $PWD/mach build
 
           - name: Mach package
             shell: bash
