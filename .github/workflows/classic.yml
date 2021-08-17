@@ -16,7 +16,6 @@ jobs:
             ENABLE_ARTIFACTS_MODE: "true"
             MOZCONFIG: "./.mozconfig-ga"
             MOZ_NOSPAM: 1
-            SHELL: "C:\\msys64\\usr\\bin\\bash.exe"
         runs-on: windows-latest
         steps:
           - name: Define cache
@@ -34,10 +33,12 @@ jobs:
               choco install rust-ms --version=1.51.0
 
           - name: Mach build
+            shell: msys2 {0}
             run: |
-              ./start-shell.bat "./mach build"
+              ./mach build
 
           - name: Mach package
+            shell: msys2 {0}
             run: |
               ./mach package
 
