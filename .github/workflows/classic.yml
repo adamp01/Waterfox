@@ -36,14 +36,14 @@ jobs:
               choco install nodejs --version=10.24.1
               choco install rust-ms --version=1.51.0
 
+          - uses: msys2/setup-msys2@v2
+
           - name: Mach build
-            uses: msys2/setup-msys2@v2
             shell: msys2 {0}
             run: |
               ./mach build
 
           - name: Mach package
-            uses: msys2/setup-msys2@v2
             shell: msys2 {0}
             run: |
               ./mach package
