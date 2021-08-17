@@ -41,7 +41,7 @@ jobs:
               update: true
           - uses: actions/setup-python@v2
             with:
-              python-version: '3.x'
+              python-version: '2.x'
 
           - name: Mach build
             shell: msys2 {0}
