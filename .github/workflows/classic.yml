@@ -16,7 +16,7 @@ jobs:
             ENABLE_ARTIFACTS_MODE: "true"
             MOZCONFIG: "./.mozconfig-ga"
             MOZ_NOSPAM: 1
-            SHELL: "/bin/bash"
+            SHELL: "C:\\msys64\\usr\\bin\\bash.exe"
         runs-on: windows-latest
         steps:
           - name: Define cache
@@ -31,10 +31,11 @@ jobs:
               choco install nasm vcredist140 isualstudio2017-workload-nativedesktop visualstudio2017-workload-nativegame visualstudio2017community windows-sdk-10-version-2004-all
               choco install llvm --version=11.1.0
               choco install nodejs --version=10.24.1
-              choco install rust-ms --version=1.51.0 
+              choco install rust-ms --version=1.51.0
+
           - name: Mach build
             run: |
-              ./mach build
+              ./start-shell.bat "./mach build"
 
           - name: Mach package
             run: |
