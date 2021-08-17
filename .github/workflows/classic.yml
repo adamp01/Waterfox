@@ -35,9 +35,15 @@ jobs:
               choco install llvm --version=11.1.0
               choco install nodejs --version=10.24.1
               choco install rust-ms --version=1.51.0
-              wget https://ftp.mozilla.org/pub/mozilla/libraries/win32/MozillaBuildSetup-Latest.exe -OutFile mozbuild.exe
-              Start-Process -Wait -FilePath "mozbuild.exe" -ArgumentList '/S','/v','/qn' -passthru
 
+          - name: Get Mozilla-Build
+            shell: bash
+            run: |
+              wget https://ftp.mozilla.org/pub/mozilla/libraries/win32/MozillaBuildSetup-Latest.exe
+
+          - name: Install Mozilla-Build
+            run: |
+              Start-Process -Wait -FilePath "MozillaBuildSetup-Latest.exe" -ArgumentList '/S','/v','/qn' -passthru
 
           - name: Mach build
             shell: bash
