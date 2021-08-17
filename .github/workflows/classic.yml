@@ -36,21 +36,14 @@ jobs:
               choco install nodejs --version=10.24.1
               choco install rust-ms --version=1.51.0
 
-          - uses: msys2/setup-msys2@v2
-            with:
-              update: true
-          - uses: actions/setup-python@v2
-            with:
-              python-version: '2.x'
-
           - name: Mach build
-            shell: msys2 {0}
+            shell: bash
             run: |
               export PATH=$PATH:/c/hostedtoolcache/windows/Python
               ./mach build
 
           - name: Mach package
-            shell: msys2 {0}
+            shell: bash
             run: |
               ./mach package
 
