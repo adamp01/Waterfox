@@ -20,6 +20,9 @@ jobs:
             MOZ_NOSPAM: 1
         runs-on: windows-latest
         steps:
+          - shell: bash
+            run: echo $PWD
+
           - name: Checkout branch
             uses: actions/checkout@v2
           - name: Define cache
@@ -48,12 +51,12 @@ jobs:
           - name: Mach build
             shell: bash
             run: |
-              "/c/mozilla-build/start-shell.bat" ./mach build
+              "/c/mozilla-build/start-shell.bat" $PWD/mach build
 
           - name: Mach package
             shell: bash
             run: |
-              "/c/mozilla-build/start-shell.bat" ./mach package
+              "/c/mozilla-build/start-shell.bat" $PWD/mach package
 
           - name: Upload artifact
             uses: actions/upload-artifact@v2
