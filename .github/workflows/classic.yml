@@ -35,11 +35,12 @@ jobs:
               choco install llvm --version=11.1.0
               choco install nodejs --version=10.24.1
               choco install rust-ms --version=1.51.0
+              echo "C:\Program Files\NASM" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+              echo "C:\ProgramData\Chocolatey\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
 
           - name: Mach build
             shell: bash
             run: |
-              export PATH=$PATH:/c/hostedtoolcache/windows/Python
               ./mach build
 
           - name: Mach package
