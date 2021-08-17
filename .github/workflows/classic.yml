@@ -31,23 +31,23 @@ jobs:
 
           - name: Install dependencies
             run: |
-              choco install ccache pkgconfiglite nasm vcredist140 isualstudio2017-workload-nativedesktop visualstudio2017-workload-nativegame visualstudio2017community windows-sdk-10-version-2004-all
+              choco install nasm vcredist140 isualstudio2017-workload-nativedesktop visualstudio2017-workload-nativegame visualstudio2017community windows-sdk-10-version-2004-all
               choco install llvm --version=11.1.0
               choco install nodejs --version=10.24.1
               choco install rust-ms --version=1.51.0
-              echo "C:\Program Files\NASM" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
-              echo "C:\ProgramData\Chocolatey\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+              wget https://ftp.mozilla.org/pub/mozilla/libraries/win32/MozillaBuildSetup-Latest.exe -OutFile mozbuild.exe
+              Start-Process -Wait -FilePath "mozbuild.exe" -ArgumentList '/S','/v','/qn' -passthru
 
-          - uses: microsoft/setup-msbuild@v1.0.2
+
           - name: Mach build
             shell: bash
             run: |
-              ./mach build
+              "/c/mozilla-build/start-shell.bat" ./mach build
 
           - name: Mach package
             shell: bash
             run: |
-              ./mach package
+              "/c/mozilla-build/start-shell.bat" ./mach package
 
           - name: Upload artifact
             uses: actions/upload-artifact@v2
