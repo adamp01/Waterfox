@@ -46,6 +46,7 @@ jobs:
           - name: Mach build
             shell: msys2 {0}
             run: |
+              export PATH=$PATH:/c/hostedtoolcache/windows/Python
               ./mach build
 
           - name: Mach package
