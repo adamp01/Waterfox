@@ -37,6 +37,11 @@ jobs:
               choco install rust-ms --version=1.51.0
 
           - uses: msys2/setup-msys2@v2
+            with:
+              update: true
+          - uses: actions/setup-python@v2
+            with:
+              python-version: '3.x'
 
           - name: Mach build
             shell: msys2 {0}
