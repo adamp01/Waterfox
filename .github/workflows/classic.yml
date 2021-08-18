@@ -40,10 +40,9 @@ jobs:
               echo "C:\Program Files\NASM" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
               echo "C:\ProgramData\Chocolatey\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
 
-          - name: Run vcvarsall
-            shell: bash
+          - name: Get SDK Location
             run: |
-              "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Auxiliary/Build/vcvarsall.bat" x64
+              $(Get-Item "hklm:\SOFTWARE\Microsoft\Microsoft SDKs\Windows").GetValue("CurrentInstallFolder")
 
           # - name: Get Mozilla-Build
           #   shell: bash
