@@ -18,7 +18,7 @@ jobs:
             ENABLE_ARTIFACTS_MODE: "true"
             MOZCONFIG: "./.mozconfig-ga"
             MOZ_NOSPAM: 1
-            WINDOWSSDKDIR: "C:\Program Files (x86)\Microsoft Visual Studio\Installer"
+            WINDOWSSDKDIR: "C:\\Program Files (x86)\\Microsoft Visual Studio\\Installer"
         runs-on: windows-latest
         steps:
           - name: Checkout branch
@@ -51,7 +51,7 @@ jobs:
           - name: Mach build
             shell: bash
             run: |
-                ./mach build
+              ./mach build
             # run: |
             #   "/c/mozilla-build/start-shell.bat" $PWD/mach build -v
 
