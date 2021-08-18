@@ -19,7 +19,7 @@ jobs:
             MOZCONFIG: "./.mozconfig-ga"
             MOZ_NOSPAM: 1
             # WINDOWSSDKDIR: "/c/Program Files (x86)/Windows Kits/10/"
-            WINDOWSSDKDIR: "/c/Program Files (x86)/Microsoft Visual Studio/Installer/
+            WINDOWSSDKDIR: "/c/Program Files (x86)/Microsoft Visual Studio/Installer/"
         runs-on: windows-latest
         steps:
           - name: Checkout branch
