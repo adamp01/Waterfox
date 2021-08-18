@@ -42,7 +42,8 @@ jobs:
 
           - name: Get SDK Location
             run: |
-              $(Get-Item "hklm:\SOFTWARE\Microsoft\Microsoft SDKs\Windows").GetValue("CurrentInstallFolder")
+              $sdk_folder = $(Get-Item "hklm:\SOFTWARE\Microsoft\Microsoft SDKs\Windows").GetValue("CurrentInstallFolder")
+              Write-Output $sdk_folder
 
           # - name: Get Mozilla-Build
           #   shell: bash
