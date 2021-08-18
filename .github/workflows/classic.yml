@@ -18,7 +18,7 @@ jobs:
             ENABLE_ARTIFACTS_MODE: "true"
             MOZCONFIG: "./.mozconfig-ga"
             MOZ_NOSPAM: 1
-            WINDOWSSDKDIR: "C:/Program Files (x86)/Windows Kits/10/"
+            WINDOWSSDKDIR: "C:/Program Files (x86)/Windows Kits/10/Include/10.0.18362.0/"
             # WINDOWSSDKDIR: "C:/Program Files (x86)/Microsoft Visual Studio/Installer/"
         runs-on: windows-latest
         steps:
@@ -42,7 +42,7 @@ jobs:
 
           - name: Get SDK Location
             run: |
-              ls "C:/Program Files (x86)/Windows Kits/10/"
+              ls "C:/Program Files (x86)/Windows Kits/10/Include/"
 
           # - name: Get Mozilla-Build
           #   shell: bash
