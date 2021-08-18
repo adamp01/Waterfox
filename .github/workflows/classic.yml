@@ -18,8 +18,8 @@ jobs:
             ENABLE_ARTIFACTS_MODE: "true"
             MOZCONFIG: "./.mozconfig-ga"
             MOZ_NOSPAM: 1
-            # WINDOWSSDKDIR: "/c/Program Files (x86)/Windows Kits/10/"
-            WINDOWSSDKDIR: "C:/Program Files (x86)/Microsoft Visual Studio/Installer/"
+            WINDOWSSDKDIR: "C:/Program Files (x86)/Windows Kits/10/"
+            # WINDOWSSDKDIR: "C:/Program Files (x86)/Microsoft Visual Studio/Installer/"
         runs-on: windows-latest
         steps:
           - name: Checkout branch
@@ -33,7 +33,7 @@ jobs:
 
           - name: Install dependencies
             run: |
-              choco install ccache pkgconfiglite yasm nasm vcredist140 visualstudio2017-workload-nativedesktop visualstudio2017-workload-nativegame visualstudio2017community windows-sdk-10-version-2004-all
+              choco install ccache pkgconfiglite yasm nasm vcredist140 visualstudio2017community visualstudio2017-workload-nativedesktop visualstudio2017-workload-nativegame windows-sdk-10-version-2004-all
               choco install llvm --version=11.1.0
               choco install nodejs --version=10.24.1
               choco install rust-ms --version=1.51.0
@@ -42,7 +42,7 @@ jobs:
 
           - name: Get SDK Location
             run: |
-              ls "C:/Program Files (x86)/Microsoft Visual Studio/Installer/"
+              ls "C:/Program Files (x86)/Windows Kits/10/"
 
           # - name: Get Mozilla-Build
           #   shell: bash
