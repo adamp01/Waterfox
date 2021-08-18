@@ -19,7 +19,7 @@ jobs:
             MOZCONFIG: "./.mozconfig-ga"
             MOZ_NOSPAM: 1
             # WINDOWSSDKDIR: "/c/Program Files (x86)/Windows Kits/10/"
-            WINDOWSSDKDIR: "/c/Program Files (x86)/Microsoft Visual Studio/Installer/"
+            WINDOWSSDKDIR: "C:/Program Files (x86)/Microsoft Visual Studio/Installer/"
         runs-on: windows-latest
         steps:
           - name: Checkout branch
@@ -39,6 +39,7 @@ jobs:
               choco install rust-ms --version=1.51.0
               echo "C:\Program Files\NASM" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
               echo "C:\ProgramData\Chocolatey\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+              call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat" x64
 
           # - name: Get Mozilla-Build
           #   shell: bash
