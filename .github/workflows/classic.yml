@@ -18,11 +18,9 @@ jobs:
             ENABLE_ARTIFACTS_MODE: "true"
             MOZCONFIG: "./.mozconfig-ga"
             MOZ_NOSPAM: 1
+            WINDOWSSDKDIR: "C:\Program Files (x86)\Microsoft Visual Studio\Installer"
         runs-on: windows-latest
         steps:
-          - shell: bash
-            run: echo $PWD
-
           - name: Checkout branch
             uses: actions/checkout@v2
           - name: Define cache
@@ -34,29 +32,33 @@ jobs:
 
           - name: Install dependencies
             run: |
-              choco install wget ccache nasm vcredist140 isualstudio2017-workload-nativedesktop visualstudio2017-workload-nativegame visualstudio2017community windows-sdk-10-version-2004-all
+              choco install ccache yasm nasm vcredist140 visualstudio2017-workload-nativedesktop visualstudio2017-workload-nativegame visualstudio2017community windows-sdk-10-version-2004-all
               choco install llvm --version=11.1.0
               choco install nodejs --version=10.24.1
               choco install rust-ms --version=1.51.0
+              echo "C:\Program Files\NASM" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+              echo "C:\ProgramData\Chocolatey\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
 
-          - name: Get Mozilla-Build
-            shell: bash
-            run: |
-              wget https://ftp.mozilla.org/pub/mozilla/libraries/win32/MozillaBuildSetup-Latest.exe
+          # - name: Get Mozilla-Build
+          #   shell: bash
+          #   run: |
+          #     wget https://ftp.mozilla.org/pub/mozilla/libraries/win32/MozillaBuildSetup-Latest.exe
 
-          - name: Install Mozilla-Build
-            run: |
-              Start-Process -Wait -FilePath "MozillaBuildSetup-Latest.exe" -ArgumentList '/S','/v','/qn' -passthru
+          # - name: Install Mozilla-Build
+          #   run: |
+          #     Start-Process -Wait -FilePath "MozillaBuildSetup-Latest.exe" -ArgumentList '/S','/v','/qn' -passthru
 
           - name: Mach build
             shell: bash
             run: |
-              "/c/mozilla-build/start-shell.bat" $PWD/mach build -v
+                ./mach build
+            # run: |
+            #   "/c/mozilla-build/start-shell.bat" $PWD/mach build -v
 
           - name: Mach package
             shell: bash
-            run: |
-              "/c/mozilla-build/start-shell.bat" $PWD/mach package
+            # run: |
+            #   "/c/mozilla-build/start-shell.bat" $PWD/mach package
 
           - name: Upload artifact
             uses: actions/upload-artifact@v2
