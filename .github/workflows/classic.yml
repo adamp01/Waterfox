@@ -38,7 +38,7 @@ jobs:
               Write-Output $env:BUILD_DIR
               c:\\mozilla-build\\start-shell.bat "$env:BUILD_DIR/build/github-actions/build.sh"
 
-          - name: Mach package
+          - name: Mach build installer
             run: |
               $pattern = '[\\]'
               $env:BUILD_DIR = $env:GITHUB_WORKSPACE
@@ -46,13 +46,13 @@ jobs:
               Write-Output $env:BUILD_DIR
               c:\\mozilla-build\\start-shell.bat "$env:BUILD_DIR/build/github-actions/package.sh"
 
-          - name: Mach package
+          - name: Sign
             run: |
               $pattern = '[\\]'
               $env:BUILD_DIR = $env:GITHUB_WORKSPACE
               $env:BUILD_DIR = $env:BUILD_DIR -replace $pattern, '/'
               Write-Output $env:BUILD_DIR
-              c:\\mozilla-build\\start-shell.bat "$env:BUILD_DIR/build/github-actions/package.sh"
+              c:\\mozilla-build\\start-shell.bat "$env:BUILD_DIR/build/github-actions/sign.sh"
 
           - name: Upload artifact
             uses: actions/upload-artifact@v2
