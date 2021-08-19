@@ -62,7 +62,7 @@ jobs:
             uses: actions/upload-artifact@v2
             with:
               name: Artifact Classic Windows ${{ github.run_id }}
-              path: ./objdir-*/dist/installer/sea/*.exe
+              path: ./objdir-*/dist/install/sea/*.exe
 
     # build:
     #     strategy:

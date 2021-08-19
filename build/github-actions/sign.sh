@@ -15,4 +15,5 @@ cp $BUILD_DIR/browser/installer/windows/app.tag .
 cp $BUILD_DIR/other-licenses/7zstub/firefox/7zSD.sfx .
 cat 7zSD.sfx app.tag app.7z > "Waterfox Classic $BROWSER_VERSION Setup.exe"
 $JAVA_PATH -jar $JSIGN_PATH --storetype AZUREKEYVAULT --keystore "$AZURE_VAULT_ID" --alias "$AZURE_CRT" --tsaurl "http://rfc3161timestamp.globalsign.com/advanced" --tsmode RFC3161 --alg SHA-256 --storepass "$(az account get-access-token --resource "https://vault.azure.net" --tenant $AZURE_TENANT_ID | jq -r .accessToken)" "Waterfox Classic $BROWSER_VERSION Setup.exe"
+rm -rf core 7zSD.sfx app.tag app.7z setup.exe
 popd
