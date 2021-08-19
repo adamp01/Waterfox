@@ -4,6 +4,7 @@ if test $(uname -s) = Darwin; then
     ac_add_options --target=x86_64-apple-darwin
     ac_add_options --enable-macos-target=10.7
     ac_add_options --with-macos-sdk=$PWD/MacOSX10.12.sdk
+    ac_add_options --enable-ccache=ccache
     export CXXFLAGS="-stdlib=libc++"
 elif test $(uname -s) = MINGW32_NT-6.2; then
     ac_add_options --target=x86_64-pc-mingw32
@@ -14,6 +15,7 @@ elif test $(uname -s) = Linux; then
     ac_add_options --target=x86_64-pc-linux-gnu
     ac_add_options --enable-pulseaudio
     ac_add_options --enable-alsa
+    ac_add_options --enable-ccache=ccache
     export CC=clang
     export CXX=clang++
     export NASM=/usr/lib/nasm-mozilla/bin/nasm
@@ -43,7 +45,6 @@ ac_add_options --disable-tests
 ac_add_options --disable-verify-mar
 
 ac_add_options --enable-application=browser
-ac_add_options --enable-ccache=ccache
 ac_add_options --enable-eme=widevine
 ac_add_options --enable-release
 ac_add_options --enable-rust-simd
