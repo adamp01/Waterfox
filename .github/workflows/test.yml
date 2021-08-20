@@ -25,6 +25,15 @@ jobs:
           - name: Checkout branch
             uses: actions/checkout@v2
 
+          - name: Get Mozilla-Build
+            shell: bash
+            run: |
+              curl -O https://ftp.mozilla.org/pub/mozilla/libraries/win32/MozillaBuildSetup-Latest.exe
+
+         - name: Install Mozilla-Build
+            run: |
+              Start-Process -Wait -FilePath "MozillaBuildSetup-Latest.exe" -ArgumentList '/S','/v','/qn' -passthru
+              
           - name: Mach build
             run: |
               $pattern = '[\\]'
