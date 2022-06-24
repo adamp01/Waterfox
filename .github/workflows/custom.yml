@@ -91,7 +91,7 @@ jobs:
           find obj-${{ env.ARCH }}/dist/waterfox -type f -name "*.dll" -exec jsign --storetype AZUREKEYVAULT --keystore ${{ secrets.AZURE_VAULT_ID }} --alias ${{ secrets.AZURE_CRT }} --tsaurl "http://rfc3161timestamp.globalsign.com/advanced" --tsmode RFC3161 --alg SHA-512 --storepass "$(az account get-access-token --resource "https://vault.azure.net" --tenant ${{ secrets.AZURE_TENANT_ID }} | jq -r .accessToken)" {} \;
           # Add distribution.ini
           mkdir obj-${{ env.ARCH }}/dist/waterfox/distribution
-          cp build/distribution/distrubition.ini obj-${{ env.ARCH }}/dist/waterfox/distribution
+          cp build/distribution/distribution.ini obj-${{ env.ARCH }}/dist/waterfox/distribution
           sed -i "s/ENGINE_LIST/${{ github.event.inputs.engines }}/g" obj-${{ env.ARCH }}/dist/waterfox/distribution/distribution.ini
           # Repackage installer
           python -m mozbuild.action.make_zip obj-${{ env.ARCH }}/dist/waterfox obj-${{ env.ARCH }}/dist/waterfox.zip
@@ -278,7 +278,7 @@ jobs:
       - name: Add distribution
         run: |
           mkdir obj-${{ env.ARCH }}/dist/waterfox/Waterfox.app/Contents/Resources/distribution
-          cp build/distribution/distrubition.ini obj-${{ env.ARCH }}/dist/waterfox/Waterfox.app/Contents/Resources/distribution
+          cp build/distribution/distribution.ini obj-${{ env.ARCH }}/dist/waterfox/Waterfox.app/Contents/Resources/distribution
           sed -i '' -e "s/ENGINE_LIST/${{ github.event.inputs.engines }}/g" obj-${{ env.ARCH }}/dist/waterfox/Waterfox.app/Contents/Resources/distribution/distribution.ini
 
       - name: ✍️ Sign .app
@@ -368,7 +368,7 @@ jobs:
       - name: Add distribution
         run: |
           mkdir obj-${{ env.ARCH }}/dist/waterfox/Waterfox.app/Contents/Resources/distribution
-          cp build/distribution/distrubition.ini obj-${{ env.ARCH }}/dist/waterfox/Waterfox.app/Contents/Resources/distribution
+          cp build/distribution/distribution.ini obj-${{ env.ARCH }}/dist/waterfox/Waterfox.app/Contents/Resources/distribution
           sed -i '' -e "s/ENGINE_LIST/${{ github.event.inputs.engines }}/g" obj-${{ env.ARCH }}/dist/waterfox/Waterfox.app/Contents/Resources/distribution/distribution.ini
 
       - name: ✍️ Sign .app
