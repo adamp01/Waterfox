@@ -329,7 +329,7 @@ jobs:
       - name: ♻️ Stage files
         run: |
           VERSION_DISPLAY=`cat browser/config/version_display.txt`
-          rsync -rtvz --chmod=D2755,F644 --delete-before --progress {obj-${{ env.ARCH }}/dist/waterfox/Waterfox\ ${VERSION_DISPLAY}\ Setup.dmg,} kontos@rsync.keycdn.com:waterfox/staging/x86_64/Darwin/distribution
+          rsync -rtvz --chmod=D2755,F644 --delete-before --progress {obj-${{ env.ARCH }}/dist/waterfox/Waterfox\ ${VERSION_DISPLAY}\ Setup.dmg,} "kontos@rsync.keycdn.com:waterfox/staging/x86_64/Darwin/distribution/Waterfox\ ${VERSION_DISPLAY}\ Setup.dmg"
 
   macos-arm64-finish:
     name: 🍎 macOS ARM64 Package and Sign
@@ -419,4 +419,4 @@ jobs:
       - name: ♻️ Stage files
         run: |
           VERSION_DISPLAY=`cat browser/config/version_display.txt`
-          rsync -rtvz --chmod=D2755,F644 --delete-before --progress {obj-${{ env.ARCH }}/dist/waterfox/Waterfox\ ${VERSION_DISPLAY}\ ARM\ Setup.dmg,} kontos@rsync.keycdn.com:waterfox/staging/aarch64/Darwin/distribution
+          rsync -rtvz --chmod=D2755,F644 --delete-before --progress {obj-${{ env.ARCH }}/dist/waterfox/obj-${{ env.ARCH }}/dist/waterfox/Waterfox\ ${VERSION_DISPLAY}\ ARM\ Setup.dmg,} "kontos@rsync.keycdn.com:waterfox/staging/aarch64/Darwin/distribution/Waterfox\ ${VERSION_DISPLAY}\ ARM\ Setup.dmg"
