@@ -46,10 +46,8 @@ const WaterfoxGlue = {
 
   async _setAttributionData() {
     // Kick off async process to set attribution code preference
-    let distSrc = Services.prefs.getCharPref("distribution.source", "");
     try {
       let attrData = await AttributionCode.getAttrDataAsync();
-      console.log(attrData);
       if (Object.keys(attrData).length) {
         let attributionStr = "";
         for (const [key, value] of Object.entries(attrData)) {
@@ -61,12 +59,20 @@ const WaterfoxGlue = {
             );
             continue;
           }
-          // If mtm_source we want to set the distribution source pref & attribution data
-          if (key == "mtm_source") {
-            Services.prefs.setCharPref("distribution.source", value);
-          } else if (key == "engine" && ["bing", "yahoo"].includes(value)) {
+          if (key == "engine" && ["bing", "yahoo"].includes(value)) {
             this._setDefaultEng(value);
             continue;
+          } else if (key == "engines") {
+            let engineList = value.split(",").map(engine => {
+              return engine + "@waterfox.net";
+            });
+            Services.prefs.setCharPref(
+              "distribution.engines",
+              engineList.join(",")
+            );
+            continue;
+          } else if (key == "uid") {
+            Services.prefs.setCharPref("distribution.uid", value);
           }
           // Only add to postSigningData if this hasn't been called previously
           attributionStr += `&${key}=${value}`;
@@ -89,29 +95,6 @@ const WaterfoxGlue = {
           "startup.homepage_override_url",
           overridePage + attributionStr
         );
-        // Set cohort
-        function getDate() {
-          const d = new Date();
-          let month = "" + (d.getMonth() + 1);
-          let day = "" + d.getDate();
-          let year = d
-            .getFullYear()
-            .toString()
-            .slice(-2);
-
-          if (month.length < 2) {
-            month = "0" + month;
-          }
-          if (day.length < 2) {
-            day = "0" + day;
-          }
-
-          return [day, month, year].join("");
-        }
-
-        Services.prefs.setCharPref("browser.distribution.cohort", getDate());
-      } else if (!distSrc) {
-        Services.prefs.clearUserPref("browser.distribution.cohort");
       }
     } catch (ex) {
       Services.console.logStringMessage(ex + "error setting attr data");
