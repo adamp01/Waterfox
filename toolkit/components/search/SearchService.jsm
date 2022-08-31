@@ -1222,17 +1222,24 @@ SearchService.prototype = {
       { webExtension: { id: "ecosia@search.waterfox.net" }, orderHint: 40 },
     ];
 
-    const distroEngineIDs = Services.prefs.getCharPref(
+    const validEngines = defaultEngines.map(engine => {
+      return engine.webExtension.id;
+    });
+
+    let distroEngineIDs = Services.prefs.getCharPref(
       "distribution.engines",
       ""
     );
 
     const distroEngines = distroEngineIDs.split(",").map((engineId, idx) => {
+      // Ensure that distroEngineIDs are valid
+      if (!validEngines.includes(engineId)) {
+        distroEngineIDs = "";
+      }
       return { webExtension: { id: engineId }, orderHint: 100 - idx * 10 };
     });
 
-    const engines =
-      SearchUtils.distroID && distroEngineIDs ? distroEngines : defaultEngines;
+    const engines = distroEngineIDs ? distroEngines : defaultEngines;
 
     for (let e of engines) {
       if (!e.webExtension) {
@@ -1249,7 +1256,6 @@ SearchService.prototype = {
 
     return { engines, privateDefault };
   },
-
 
   _setDefaultAndOrdersFromSelector(engines, privateDefault) {
     const defaultEngine = engines[0];

@@ -4660,7 +4660,7 @@ Checker.prototype = {
     // Add default engine
     let defaultSearch = await Services.search.getDefault();
     if (defaultSearch) {
-      url += (url.includes("?") ? "&" : "?") + "search=" + defaultSearch;
+      url += (url.includes("?") ? "&" : "?") + "search=" + defaultSearch.name;
     }
 
     LOG("Checker:getUpdateURL - update URL: " + url);

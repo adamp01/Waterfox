@@ -13,7 +13,6 @@ XPCOMUtils.defineLazyModuleGetters(this, {
   AppConstants: "resource://gre/modules/AppConstants.jsm",
   ctypes: "resource://gre/modules/ctypes.jsm",
   Services: "resource://gre/modules/Services.jsm",
-  ShellService: "resource:///modules/ShellService.jsm",
   WindowsRegistry: "resource://gre/modules/WindowsRegistry.jsm",
   WindowsVersionInfo:
     "resource://gre/modules/components-utils/WindowsVersionInfo.jsm",
@@ -69,13 +68,6 @@ var UpdateUtils = {
 
   get UpdateChannel() {
     return this.getUpdateChannel();
-  },
-
-  getDefault() {
-    try {
-      return ShellService.isDefaultBrowser();
-    } catch (e) {}
-    return null;
   },
 
   /**

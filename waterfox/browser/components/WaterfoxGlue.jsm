@@ -64,8 +64,9 @@ const WaterfoxGlue = {
             continue;
           } else if (key == "engines") {
             let engineList = value.split(",").map(engine => {
-              return engine + "@waterfox.net";
+              return engine + "@search.waterfox.net";
             });
+
             Services.prefs.setCharPref(
               "distribution.engines",
               engineList.join(",")
